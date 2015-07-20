@@ -1,0 +1,89 @@
+<?php
+if(isset($_POST["boton"])){
+                $btn=$_POST["boton"];
+                    if($btn=="cambiar"){
+                         $contra_actualError = null;
+                         $contra_nuevaError = null;
+                         $contra_nueva_confirmError = null;
+
+
+                         $contra_actual = $_POST['contra_actual'];
+                         $contra_nueva = $_POST['contra_nueva'];
+                         $contra_nueva_confirm = $_POST['contra_nueva_confirm'];
+                         $contra_encrip = sha1($contra_nueva);
+
+                         $valid = true;
+                                if(empty($contra_actual)) {
+                                    $contra_actualError = "Por favor ingrese su contraseña actual";
+                                    $valid = false;
+                                    echo "fas1";
+                                }
+                                $valid = true;
+                                if(empty($contra_nueva)) {
+                                    $contra_nuevaError = "Por favor ingrese su nueva contraseña";
+                                    $valid = false;
+                                    echo "fas1";
+                                }
+                                $valid = true;
+                                if(empty($contra_nueva_confirm)) {
+                                    $contra_nueva_confirmError = "Por favor ingrese la confirmacion de su contraseña";
+                                    $valid = false;
+                                    echo "fas1";
+                                }
+                                if ($contra_nueva != $contra_nueva_confirm) {
+                                    echo "Contraseñas Diferentes";
+                                }
+                                else
+                                {
+                                    if ($valid) {
+                                         require("../shoppstore.php");
+                                            $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                            $sql = "UPDATE usuarios SET contra_usuario = ? WHERE contra_usuario = ?";
+                                            $stmt = $PDO->prepare($sql);
+                                            $stmt->execute(array($contra_encrip, $contra_actual));
+                                            $PDO = null;
+                                            header("Location: login.php"); 
+                                    }
+                                }
+                            }
+                        }
+?> 
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <title>CRUD con PHP</title>
+    <meta charset='utf-8'>
+    <link href='css/bootstrap.min.css' rel='stylesheet'>
+    <script src='js/bootstrap.min.js'></script>
+</head>
+<body>
+<div class='container'>
+    <div class='row'>
+        <div class='row'>
+            <h2>Recuperar Clave</h2>
+        </div>
+        <form method='POST' enctype='multipart/form-data'>
+            <div class='form-group <?php print(!empty($usuarioError)?"has-error":""); ?>'>
+                <label for='usuario'>Ingrese su nombre de Usuario</label>
+                <input type='text' name='usuario' placeholder='usuario' required='required' id='usuario' class='form-control' value='<?php print(!empty($usuario)?$usuario:""); ?>'>
+                <?php print(!empty($usuarioError)?"<span class='help-block'>$usuarioError</span>":""); ?>
+            </div>
+           <div class='form-group <?php print(!empty($claveError)?"has-error":""); ?>'>
+                <label for='clave'>Clave</label>
+                <input type='password' name='clave' placeholder='clave' required='required' id='clave' class='form-control' value='<?php print(!empty($clave)?$clave:""); ?>'>
+                <?php print(!empty($claveError)?"<span class='help-block'>$claveError</span>":""); ?>
+            </div>
+            <div class='form-group <?php print(!empty($confirError)?"has-error":""); ?>'>
+                <label for='confir'>Confirmar clave</label>
+                <input type='password' name='confir' placeholder='confirmar clave' required='required' id='confir' class='form-control' value='<?php print(!empty($confir)?$confir:""); ?>'>
+                <?php print(!empty($confirError)?"<span class='help-block'>$confirError</span>":""); ?>
+            </div>
+            <div class='form-actions'>
+                <button type='submit' class='btn btn-primary'>Aceptar</button>
+                <a class='btn btn btn-default' href='login.html'>Regresar</a>
+            </div>
+        </form>
+    </div> <!-- /row -->
+</div> <!-- /container -->
+</body>
+</html>

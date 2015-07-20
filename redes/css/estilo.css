@@ -1,0 +1,16 @@
+body
+{
+	background-image: url('fondo4.jpg'); 
+}
+.container{
+	width: 80%;
+	margin: 0 auto;
+	max-width: 1000px;
+	overflow: hidden;
+}
+div{
+	width: 70%;
+}
+.row{
+	width: 70%;
+}

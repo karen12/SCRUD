@@ -1,0 +1,122 @@
+<?php
+   require("db.php");
+    if(!empty($_POST)) {
+        // validation errors
+        $usuariosError = null;
+               
+       
+        // post values
+        $usuarios = $_POST["usuarios"];
+    }
+   
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+	<title>COLEGIO BRADFORD</title>
+    <meta charset='utf-8'>
+    <link href='css/bootstrap.min.css' rel='stylesheet'>
+    <script src='js/bootstrap.min.js'></script>
+	<link href='http://fonts.googleapis.com/css?family=Pinyon+Script' rel='stylesheet' type='text/css'>
+     
+     <style type="text/css">
+       * {
+
+       	margin:0px;
+       	padding:0px;
+
+       }
+        
+        body {
+            background: fixed;
+        	background:url(1.jpg);
+        	background-position:center;
+        }
+
+        form 
+        {
+        	background:#333333;
+        	width:360px;
+        	border:1px solid #4e4d4d;
+        	border-radius:3px;
+        	-moz-border-radius:3px;
+        	-webkit-border-radius:3px;
+        	box-shadow:inset 0 0 10px #000;
+        	margin:100px auto;
+        }
+
+        form h1 {
+        	text-align:center;
+        	color:#fff;
+        	font-weight:normal;
+        	font-size:40pt;
+        	margin:30px 0px;
+        	font-family: 'Pinyon Script', cursive;
+         }
+
+         form input {
+         	width:280px;
+         	height:35px;
+         	padding:0px 10px;
+         	margin:10px  30px;
+         	color:#6d6d6d;
+         	text-align:center;
+         }
+
+         form button {
+
+         	width:135px;
+         	margin:20px 0px 30px 30px;
+         	height:50px;
+         	background: #3c3c3c; /* Old browsers */
+background: -moz-linear-gradient(top, #3c3c3c 1%, #595959 12%, #666666 25%, #474747 39%, #2c2c2c 50%, #000000 51%, #111111 60%, #2b2b2b 76%, #1c1c1c 91%, #2a2828 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#3c3c3c), color-stop(12%,#595959), color-stop(25%,#666666), color-stop(39%,#474747), color-stop(50%,#2c2c2c), color-stop(51%,#000000), color-stop(60%,#111111), color-stop(76%,#2b2b2b), color-stop(91%,#1c1c1c), color-stop(100%,#2a2828)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #3c3c3c 1%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#2a2828 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #3c3c3c 1%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#2a2828 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #3c3c3c 1%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#2a2828 100%); /* IE10+ */
+background: linear-gradient(to bottom, #3c3c3c 1%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#2a2828 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3c3c3c', endColorstr='#2a2828',GradientType=0 ); /* IE6-9 */
+          
+          border:1px solid#232323;
+          color:#fff;
+          box-shadow: 0px 2px 0px #000;
+         -moz-box-shadow: 0px 2px 0px #000;
+         -webkit-box-shadow: 0px 2px 0px #000;
+         border-radius:3px;
+         -moz-border-radius:3px;
+         -webkit- border-radius:3px;
+         }
+         form button:hover
+         {
+         	background:#3a3a3a;
+         }
+
+         form button:active {
+         	background: #2a2828; /* Old browsers */
+            background: -moz-linear-gradient(top, #2a2828 0%, #1c1c1c 9%, #2b2b2b 24%, #111111 40%, #000000 49%, #2c2c2c 50%, #474747 61%, #666666 75%, #595959 88%, #3c3c3c 99%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2a2828), color-stop(9%,#1c1c1c), color-stop(24%,#2b2b2b), color-stop(40%,#111111), color-stop(49%,#000000), color-stop(50%,#2c2c2c), color-stop(61%,#474747), color-stop(75%,#666666), color-stop(88%,#595959), color-stop(99%,#3c3c3c)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, #2a2828 0%,#1c1c1c 9%,#2b2b2b 24%,#111111 40%,#000000 49%,#2c2c2c 50%,#474747 61%,#666666 75%,#595959 88%,#3c3c3c 99%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, #2a2828 0%,#1c1c1c 9%,#2b2b2b 24%,#111111 40%,#000000 49%,#2c2c2c 50%,#474747 61%,#666666 75%,#595959 88%,#3c3c3c 99%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, #2a2828 0%,#1c1c1c 9%,#2b2b2b 24%,#111111 40%,#000000 49%,#2c2c2c 50%,#474747 61%,#666666 75%,#595959 88%,#3c3c3c 99%); /* IE10+ */
+            background: linear-gradient(to bottom, #2a2828 0%,#1c1c1c 9%,#2b2b2b 24%,#111111 40%,#000000 49%,#2c2c2c 50%,#474747 61%,#666666 75%,#595959 88%,#3c3c3c 99%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2a2828', endColorstr='#3c3c3c',GradientType=0 ); /* IE6-9 */
+         }
+
+     </style>
+
+
+</head>
+
+<body>
+        <form action ="login.php" method='POST'>
+                <h1>Colegio Bradford</h1>
+                <input type="text" name="usuarios" mx-length="20" required='required' placeholder="Ingrese su usuario"/>
+
+                <input type="password" name="claves" mx-length="20"  placeholder="Ingrese su contrasena"/>
+                
+                <button type="submit">Iniciar</button>
+                <a class='btn btn btn-black' href='1.php'>Recuperar Contraseña</a>
+        </form>
+</body>
+</html>
